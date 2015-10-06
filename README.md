@@ -3,12 +3,11 @@ NewRelic module for ZF2
 
 NewRelic module provide an object-oriented PHP wrapper for [New Relic](http://newrelic.com/) monitoring service.
 
-[![Build Status](https://img.shields.io/travis/neeckeloo/NewRelic.svg?style=flat)](http://travis-ci.org/neeckeloo/NewRelic)
-[![Latest Stable Version](http://img.shields.io/packagist/v/neeckeloo/NewRelic.svg?style=flat)](https://packagist.org/packages/neeckeloo/NewRelic)
-[![Total Downloads](http://img.shields.io/packagist/dt/neeckeloo/NewRelic.svg?style=flat)](https://packagist.org/packages/neeckeloo/newrelic)
-[![Coverage Status](http://img.shields.io/coveralls/neeckeloo/NewRelic.svg?style=flat)](https://coveralls.io/r/neeckeloo/NewRelic)
-[![Scrutinizer Quality Score](http://img.shields.io/scrutinizer/g/neeckeloo/NewRelic.svg?style=flat)](https://scrutinizer-ci.com/g/neeckeloo/NewRelic/)
-[![Dependencies Status](https://www.versioneye.com/user/projects/519e3304a20a6c000200df0e/badge.svg?style=flat)](https://www.versioneye.com/user/projects/519e3304a20a6c000200df0e)
+[![Build Status](https://secure.travis-ci.org/neeckeloo/NewRelic.png?branch=master)](http://travis-ci.org/neeckeloo/NewRelic)
+[![Latest Stable Version](https://poser.pugx.org/neeckeloo/NewRelic/v/stable.png)](https://packagist.org/packages/neeckeloo/NewRelic)
+[![Coverage Status](https://coveralls.io/repos/neeckeloo/NewRelic/badge.png)](https://coveralls.io/r/neeckeloo/NewRelic)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/neeckeloo/NewRelic/badges/quality-score.png?s=d8f10c2b5c49a2cebe53b533b7a281368b8ddb07)](https://scrutinizer-ci.com/g/neeckeloo/NewRelic/)
+[![Dependencies Status](http://depending.in/neeckeloo/NewRelic.png)](http://depending.in/neeckeloo/NewRelic)
 
 Introduction
 ------------
@@ -20,7 +19,7 @@ The current route is used to set the name of each transaction. Moreover, the mod
 Requirements
 ------------
 
-* PHP 5.5 or higher
+* PHP 5.3 or higher
 
 Installation
 ------------
@@ -30,14 +29,14 @@ NewRelic module only officially supports installation through Composer. For Comp
 
 You can install the module from command line:
 ```sh
-$ php composer.phar require neeckeloo/newrelic:~1.2
+$ php composer.phar require neeckeloo/newrelic:1.4.*
 ```
 
 Alternatively, you can also add manually the dependency in your `composer.json` file:
 ```json
 {
     "require": {
-        "neeckeloo/newrelic": "~1.2"
+        "neeckeloo/newrelic": "1.4.*"
     }
 }
 ```
@@ -49,8 +48,8 @@ Default configuration
 ---------------------
 
 ```php
-return [
-    'newrelic' => [
+return array(
+    'newrelic' => array(
         // Sets the newrelic app name.  Note that this will discard metrics
         // collected before the name is set.  If empty then your php.ini
         // configuration will take precedence.
@@ -72,12 +71,12 @@ return [
         'exceptions_logging_enabled' => false,
 
         // Defines ignored transactions
-        'ignored_transactions' => [],
+        'ignored_transactions' => array(),
 
         // Defines background job transactions
-        'background_jobs' => [],
-    ],
-];
+        'background_jobs' => array(),
+    ),
+);
 ```
 
 Usage
@@ -90,16 +89,16 @@ NewRelic API allows to ignore some transactions. This configuration defines some
 #### Ignore routes
 
 ```php
-return [
-    'newrelic' => [
-        'ignored_transactions' => [
-            'routes' => [
+return array(
+    'newrelic' => array(
+        'ignored_transactions' => array(
+            'routes' => array(
                 'admin*',
                 'user/login',
-            ],
-        ],
-    ],
-];
+            ),
+        ),
+    ),
+);
 ```
 
 Those rules ignore all admin routes and the "user/login" route.
@@ -107,32 +106,32 @@ Those rules ignore all admin routes and the "user/login" route.
 #### Ignore controllers
 
 ```php
-return [
-    'newrelic' => [
-        'ignored_transactions' => [
-            'controllers' => [
+return array(
+    'newrelic' => array(
+        'ignored_transactions' => array(
+            'controllers' => array(
                 'FooController',
                 'BarController',
                 'BazController',
-            ],
-        ],
-    ],
-];
+            ),
+        ),
+    ),
+);
 ```
 
 You can also ignore some actions of specified controllers :
 
 ```php
-return [
-    'newrelic' => [
-        'ignored_transactions' => [
-            'controllers' => [
-                ['FooController', ['foo', 'bar']],
-                ['BarController', ['baz']],
-            ],
-        ],
-    ],
-];
+return array(
+    'newrelic' => array(
+        'ignored_transactions' => array(
+            'controllers' => array(
+                array('FooController', array('foo', 'bar')),
+                array('BarController', array('baz')),
+            ),
+        ),
+    ),
+);
 ```
 
 #### Ignore a transaction manually
@@ -149,11 +148,11 @@ $client->ignoreTransaction();
 The configuration of background jobs is identical to ignored transactions but use the key ```background_jobs``` as below.
 
 ```php
-return [
-    'newrelic' => [
-        'background_jobs' => [],
-    ],
-];
+return array(
+    'newrelic' => array(
+        'background_jobs' => array(),
+    ),
+);
 ```
 
 #### Define a background job manually
@@ -170,11 +169,11 @@ $client->backgroundJob(true);
 You can ignore apdex metrics like transaction metrics using the key ```ignored_apdex```.
 
 ```php
-return [
-    'newrelic' => [
-        'ignored_apdex' => [],
-    ],
-];
+return array(
+    'newrelic' => array(
+        'ignored_apdex' => array(),
+    ),
+);
 ```
 
 #### Ignore apdex metrics manually

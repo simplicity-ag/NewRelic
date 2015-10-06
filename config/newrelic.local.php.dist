@@ -1,6 +1,6 @@
 <?php
-return [
-    'newrelic' => [
+return array(
+    'newrelic' => array(
         /**
          * Define the name of the application as it will be seen in the New Relic UI
          */
@@ -29,16 +29,16 @@ return [
         /**
          * Defines transactions that does not generate metrics
          */
-        'ignored_transactions' => [],
+        'ignored_transactions' => array(),
 
         /**
          * Defines background job transactions
          */
-        'background_jobs' => [],
+        'background_jobs' => array(),
 
         /**
          * Defines transactions that does not generate apdex metrics
          */
-        'ignored_apdex' => [],
-    ],
-];
+        'ignored_apdex' => array(),
+    ),
+);
